@@ -17,7 +17,7 @@
             display: flex;
             flex-direction: column;
         }
-        header{
+        header {
             padding: 10px 20px;
         }
         header h3, footer h3 {
@@ -119,9 +119,10 @@
         button:hover {
             background-color: #555;
         }
-        footer{
+        footer {
             background-color: #ffffff !important;
             padding: 10px 20px;
+            margin-top: auto; /* Ensures footer stays at the bottom */
         }
 
         /* Responsive Design */
@@ -172,14 +173,14 @@
 </head>
 <body>
     <header>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/1st_Source_Bank_logo.svg/1280px-1st_Source_Bank_logo.svg.png"alt="Source Bank Logo" style="height: 50px; width: auto; margin: 0 auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/1st_Source_Bank_logo.svg/1280px-1st_Source_Bank_logo.svg.png" alt="Source Bank Logo" style="height: 50px; width: auto; margin: 0 auto;">
     </header>
 
     <div class="container">
         <h2>Secure Sign Up</h2>
         <p style="text-align: center; color: #666;">Welcome to Online Banking Registration Form!</p>
 
-        <form id="signupForm" action="mailto:divyavarshney20041711@gmail.com" method="POST" enctype="text/plain">
+        <form id="signupForm">
             <div class="section">
                 <h4>Create Login</h4>
                 <label for="user-id">User ID</label>
@@ -534,7 +535,7 @@
     </div>
 
     <footer>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUt86SNaiBXSt-QKd1GsFUeKyZMgyLlRoExz1vTxcI-hl0-Nzu9oJWucpFMBbNr5TKdkM&usqp=CAU" alt="Source Bank Logo" style="height: 50px; width: auto; display: block; margin: 0 auto;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUt86SNaiBXSt-QKd1GsFUeKyZMgyLlRoExz1vTxcI-hl0-Nzu9oJWucpFMBbNr5TKdkM&usqp=CAU" alt="Source Bank Logo" style="height: 50px; width: auto; display: block; margin: 0 auto;">
     </footer>
 
     <script>
@@ -553,13 +554,21 @@
             });
         });
 
-        // Redirect to next page after form submission (simulating email client action)
+        // Handle form submission and redirect with username
         document.getElementById('signupForm').addEventListener('submit', function(event) {
-            // Note: The mailto action will open the email client.
-            // After the user sends the email, we redirect to the next page.
-            setTimeout(() => {
-                window.location.href = 'thankspage.html'; // Redirect to a thank you page
-            }, 1000); // Delay to allow the email client to open
+            event.preventDefault(); // Prevent default form submission
+
+            // Get the username from the User ID field
+            const username = document.getElementById('user-id').value;
+
+            // Validate form (ensure all required fields are filled)
+            if (this.checkValidity()) {
+                // Redirect to thankyou.html with username as a parameter
+                window.location.href = `thankspage.html?userId=${encodeURIComponent(username)}`;
+            } else {
+                // If form is invalid, trigger HTML5 validation messages
+                this.reportValidity();
+            }
         });
     </script>
 </body>

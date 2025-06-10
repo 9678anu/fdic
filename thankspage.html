@@ -85,9 +85,10 @@
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
-        footer{
+        footer {
             background-color: #ffffff !important;
             padding: 10px 20px;
+            margin-top: auto; /* Ensures footer stays at the bottom */
         }
 
         /* Responsive Design */
@@ -131,7 +132,7 @@
 </head>
 <body>
     <header>
-       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/1st_Source_Bank_logo.svg/1280px-1st_Source_Bank_logo.svg.png"alt="Source Bank Logo" style="height: 50px; width: auto; margin: 0 auto;">
+       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/1st_Source_Bank_logo.svg/1280px-1st_Source_Bank_logo.svg.png" alt="Source Bank Logo" style="height: 50px; width: auto; margin: 0 auto;">
     </header>
 
     <div class="container">
@@ -156,7 +157,7 @@
         const popup = document.createElement('div');
         popup.className = 'popup';
         popup.innerHTML = `
-            <h2>Congratulations...!</h2>
+            <h2>Congratulations ${userId}!</h2>
             <p>Your account has been successfully created.<br>
             You can now access all banking services.<br>
             Thank you for choosing Source Bank.<br>
