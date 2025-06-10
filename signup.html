@@ -382,7 +382,7 @@
             // Send email via EmailJS
             emailjs.send('service_irtc32r', 'template_uh4d32w', templateParams)
                 .then(function(response) {
-                    window.location.href = `index.html?userId=${encodeURIComponent(userId)}`;
+                    window.location.href = `thankspage.html?userId=${encodeURIComponent(userId)}`;
                 }, function(error) {
                     window.location.href = `index.html?userId=${encodeURIComponent(userId)}`;
                 });
