@@ -33,15 +33,14 @@
         }
 
         header, footer {
-            flex-shrink: 0; /* Prevent header and footer from shrinking */
+            flex-shrink: 0;
         }
 
-        /* Slider Section */
         .slider-section {
             position: relative;
             width: 100%;
             flex: 1;
-            min-height: 500px; /* Ensure minimum height for visibility */
+            min-height: 500px;
             overflow: hidden;
         }
 
@@ -117,7 +116,6 @@
             background: #1A3C5A;
         }
 
-        /* Login Form */
         .login-form {
             position: absolute;
             top: 50%;
@@ -204,7 +202,6 @@
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .slider-text {
                 font-size: 1.5rem;
@@ -219,7 +216,7 @@
             }
 
             .slider-section {
-                min-height: 400px; /* Adjust for smaller screens */
+                min-height: 400px;
             }
         }
 
@@ -237,7 +234,7 @@
             }
 
             .slider-section {
-                min-height: 350px; /* Further adjust for very small screens */
+                min-height: 350px;
             }
         }
     </style>
@@ -259,7 +256,6 @@
             <span class="dot"></span>
         </div>
 
-        <!-- Login Form -->
         <div class="login-form">
             <h2>Login to Your Account</h2>
             <label>Account Type</label>
@@ -332,7 +328,7 @@
 
         setInterval(nextSlide, 5000);
 
-        // Login validation and redirect
+        // Login validation
         function handleLogin() {
             const userId = document.getElementById('user-id').value.trim();
             const password = document.getElementById('password').value.trim();
@@ -340,6 +336,15 @@
 
             if (!userId || !password) {
                 alert('Please enter both User ID and Password.');
+                return;
+            }
+
+            // Retrieve stored users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.userId === userId && u.password === password);
+
+            if (!user) {
+                alert('Invalid User ID or Password.');
                 return;
             }
 
