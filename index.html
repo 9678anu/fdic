@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page with Slider</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Slider Section */
+        .slider-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden;
+        }
+
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image covers area without distortion */
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slider img.active {
+            opacity: 1;
+        }
+
+        /* Gradient Overlay for Better Text Visibility */
+        .slider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
+            z-index: 2;
+        }
+
+        /* Slider Text */
+        .slider-text {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            transform: translateY(-50%);
+            z-index: 3;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        /* Slider Dots */
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            opacity: 1;
+        }
+
+        /* Login Form */
+        .login-form {
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%);
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.95);
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-form select,
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            font-size: 14px;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background: #1A3C5A; /* Matching the login button color */
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background: #14344b;
+        }
+
+        .login-form .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        .login-form .links a {
+            color: #1A3C5A;
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .slider-text {
+                font-size: 1.5rem;
+                left: 3%;
+            }
+
+            .login-form {
+                width: 90%;
+                right: 50%;
+                transform: translate(50%, -50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slider Section -->
+     <div>
+        <header>
+<img src="img/header.png" style="width: 100%;">        </header>
+      
+     </div>
+    <div class="slider-section">
+        <div class="slider">
+            <!-- Add your image URLs here -->
+            <img src="img/1slide.jpg" alt="Slide 1" class="active">
+            <img src="img/2slide.jpg" alt="Slide 2">
+            <img src="img/3slide.jpg" alt="Slide 3">
+        </div>
+        <!-- <div class="slider-text">Self-guided courses</div> -->
+        <div class="slider-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <!-- Login Form -->
+        <div class="login-form">
+          <level>Account Type</level>
+            <select>
+    <option>Personal Online Banking</option>
+    <option>Retirement Plan Services</option>
+    <option>Wealth Advisory Online</option>
+    <option>Wealth Planner</option>
+    <option>Asset Advisors Online</option>
+    <option>Donor-Advised Fund</option>
+    <option>Credit Cards</option>
+    <option>Insurance</option>
+    <option>Business</option>
+    <option>BBO Treasury</option>
+    <option>Remote Deposit Express</option>
+    <option>Retirement Plan Services</option>
+    <option>Credit Cards</option>
+    <option>Remote Deposit Express Legacy</option>
+            </select>
+            <level>User Id</level>
+
+            <input type="text">
+            <level>Password</level>
+
+            <input type="password">
+            <a href="signup.html">
+            <button>Login</button></a>
+            <div class="links">
+                <a href="account.html">Sign Up</a>
+                <a href="#">Forgot Password</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+<img src="img/body.png" style="width: 100%;">  </footer>
+    <script>
+        const slides = document.querySelectorAll('.slider img');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+                dots[i].classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - Source Bank</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+        }
+
+        footer {
+            padding: 10px 20px;
+            background-color: #ffffff;
+            text-align: center;
+            margin-top: auto; /* Ensures footer stays at the bottom */
+        }
+
+        /* Account Details */
+        .account-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .account-details .details-container {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: left;
+        }
+
+        .account-details h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .account-details p {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .account-details .balance {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1A3C5A;
+            margin: 20px 0;
+        }
+
+        .account-details button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #1A3C5A;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .account-details button:hover {
+            background: #14344b;
+        }
+
+        .account-details .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        .account-details .links a {
+            color: #1A3C5A;
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .account-details .details-container {
+                width: 90%;
+                padding: 15px;
+            }
+
+            .account-details h2 {
+                font-size: 1.5rem;
+            }
+
+            .account-details .balance {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/1st_Source_Bank_logo.svg/1280px-1st_Source_Bank_logo.svg.png" alt="Source Bank Logo" style="height: 50px; width: auto;">
+    </header>
+
+    <!-- Account Details -->
+    <div class="account-details">
+        <div class="details-container">
+            <h2>Account Overview</h2>
+            <p><strong>Username:</strong> <span id="username">User</span></p>
+            <p><strong>Account Number:</strong> <span id="account-number">Not Provided</span></p>
+            <p><strong>Account Type:</strong> <span id="account-type">Not Selected</span></p>
+            <p><strong>Last Login Date:</strong> <span id="login-date">Not Available</span></p>
+            <p class="balance"><strong>Balance:</strong> <span id="balance">$0.00</span></p>
+            <a href="index.html">
+            <button>View Services</button></a>
+            <div class="links">
+                <a href="index.html">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUt86SNaiBXSt-QKd1GsFUeKyZMgyLlRoExz1vTxcI-hl0-Nzu9oJWucpFMBbNr5TKdkM&usqp=CAU" alt="Source Bank Logo" style="height: 50px; width: auto;">
+    </footer>
+
+    <script>
+        // Get user details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('userId') || 'User';
+        const accountNumber = urlParams.get('accountNumber') || 'Not Provided';
+        const accountType = urlParams.get('accountType') || 'Not Selected';
+        const balance = urlParams.get('balance') || '$0.00';
+
+        // Update account details
+        document.getElementById('username').textContent = userId;
+        document.getElementById('account-number').textContent = accountNumber;
+        document.getElementById('account-type').textContent = accountType;
+        document.getElementById('balance').textContent = balance;
+
+        // Set dynamic login date (today's date)
+        const today = new Date('2025-06-10T20:48:00+05:30'); // System-provided date and time
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('login-date').textContent = today.toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>

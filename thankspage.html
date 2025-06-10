@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        header {
+            padding: 10px 20px;
+        }
+        header h3, footer h3 {
+            color: #ff4500;
+            font-size: 1.5em;
+            margin: 0;
+            text-align: left;
+        }
+        footer h3 {
+            text-align: center;
+        }
+        header h3 span, footer h3 span {
+            color: #000;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            z-index: 1000;
+        }
+        .popup h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .popup p {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .popup button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .popup button:hover {
+            background-color: #555;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        footer{
+            background-color: #ffffff !important;
+            padding: 10px 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h3, footer h3 {
+                font-size: 1.2em;
+            }
+            .popup {
+                padding: 20px;
+            }
+            .popup h2 {
+                font-size: 1.3em;
+            }
+            .popup p {
+                font-size: 0.9em;
+            }
+            .popup button {
+                font-size: 0.9em;
+                padding: 8px 16px;
+            }
+        }
+        @media (max-width: 480px) {
+            header h3, footer h3 {
+                font-size: 1em;
+            }
+            .popup {
+                padding: 15px;
+            }
+            .popup h2 {
+                font-size: 1.1em;
+            }
+            .popup p {
+                font-size: 0.85em;
+            }
+            .popup button {
+                font-size: 0.85em;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/1st_Source_Bank_logo.svg/1280px-1st_Source_Bank_logo.svg.png"alt="Source Bank Logo" style="height: 50px; width: auto; margin: 0 auto;">
+    </header>
+
+    <div class="container">
+        <!-- Popup will be injected here -->
+    </div>
+
+    <footer>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUt86SNaiBXSt-QKd1GsFUeKyZMgyLlRoExz1vTxcI-hl0-Nzu9oJWucpFMBbNr5TKdkM&usqp=CAU" alt="Source Bank Logo" style="height: 50px; width: auto; display: block; margin: 0 auto;">
+    </footer>
+
+    <script>
+        // Get the userId from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('userId') || 'User';
+
+        // Create the overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        document.body.appendChild(overlay);
+
+        // Create the popup
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        popup.innerHTML = `
+            <h2>Congratulations...!</h2>
+            <p>Your account has been successfully created.<br>
+            You can now access all banking services.<br>
+            Thank you for choosing Source Bank.<br>
+            Start your banking journey today!</p>
+            <button onclick="window.location.href='index.html'">Back to Login</button>
+        `;
+        document.querySelector('.container').appendChild(popup);
+    </script>
+</body>
+</html>
